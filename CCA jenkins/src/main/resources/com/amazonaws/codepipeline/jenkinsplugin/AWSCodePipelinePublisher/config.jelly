@@ -1,0 +1,30 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+
+<f:entry title="Output Locations" field="outputArtifacts" type="hidden">
+  <f:repeatable var="outputLocations" items="${instance.outputArtifacts}" noAddButton="false" minimum="0">
+  <table width="100%">
+      <f:description>
+          You can use the Location field to publish a file or folder in the workspace, or leave this field blank to
+          publish everything in the workspace.
+
+          Artifact name refers to the AWS CodePipeline action output artifact. You can leave this field blank or use
+          it to match Jenkins locations and action output artifacts. If you leave the Artifact Name field blank for
+          one artifact, you must leave all Artifact Name fields blank.
+      </f:description>
+      <f:entry title="Location">
+          <f:textbox name="Location.location" value="${outputLocations.location}" />
+      </f:entry>
+      <f:entry title="Artifact Name">
+          <f:textbox name="ArtifactName.artifactName" value="${outputLocations.artifactName}" />
+      </f:entry>
+      <f:entry>
+          <div align="right">
+              <input type="button" value="Add more" class="repeatable-add" />
+              <input type="button" value="Delete" class="repeatable-delete" style="margin-left: 1em;" />
+          </div>
+      </f:entry>
+  </table>
+  </f:repeatable>
+  </f:entry>
+</j:jelly>
